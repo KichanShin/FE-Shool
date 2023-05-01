@@ -8,91 +8,27 @@
       rel="stylesheet"
       href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"
     />
+    <link rel="stylesheet" href="./style.css" />
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        background-color: #eee;
-      }
-
-      header {
-        width: 100%;
-        max-width: 1564px;
-        text-align: center;
-        padding: 6rem;
-        background-color: #323752;
-        color: #fff;
-      }
-
-      main {
-        width: 100%;
-        margin: auto;
-        display: flex;
-        justify-content: space-around;
-        /* gap: 20px; */
-        /* align-items: center; */
-        background-color: #eee;
-      }
-
-      section {
-        flex-basis: 50%;
-        flex-grow: 1;
-        padding: 50px;
-      }
-
-      #display {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 50px;
-      }
-      input {
-        display: block;
-        width: 500px;
-        height: 30px;
-        margin: auto;
-        margin-bottom: 40px;
-      }
-
-      textarea {
-        display: block;
-        width: 300px;
-        height: 300px;
-        margin-bottom: 10px;
-      }
-
-      button {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        display: block;
-        width: 450px;
-        height: 50px;
-        background-color: #fff;
-      }
-      .btn1 {
-        margin: 20px auto 10px;
-      }
-
-      #editor {
-        background-color: #fff;
-      }
-    </style>
   </head>
   <body>
     <header><h1>MEMO</h1></header>
     <main>
-      <section>
-        <input type="text" name="" id="title" />
+      <section class="wrap">
+        <input
+          type="text"
+          id="title"
+          placeholder="제목을 입력해주세요"
+          required
+        />
         <div id="editor"></div>
-        <!-- <textarea name="" id="content" cols="30" rows="10"></textarea> -->
+
         <button class="btn1" onclick="saveNote()">메모</button>
       </section>
 
-      <section id="display"></section>
+      <section id="display" class="wrap"></section>
     </main>
+
     <script>
       let allMemo = JSON.parse(localStorage.getItem("allMemo"));
       allMemo = allMemo ?? [];
@@ -101,18 +37,15 @@
 
       const editor = new Editor({
         el: document.querySelector("#editor"),
-        height: "600px",
+        height: "500px",
         initialEditType: "markdown",
         previewStyle: "vertical",
       });
-      // editor.getHTML()
-      // editor.getMarkdown()
 
       render();
 
       function saveNote() {
         const title = document.getElementById("title").value;
-        // const content = document.getElementById("content").value;
         const content = editor.getHTML();
 
         allMemo.push({ title, content, len: allMemo.length });
@@ -125,11 +58,6 @@
         const display = document.getElementById("display");
         display.innerHTML = "";
 
-        // // 최신 게시물이 위로 올라오도록
-        // for (let i = allMemo.length; i > 0 ; i--) {
-        //     // 아래와 유사 코드
-        // }
-
         for (const item of allMemo) {
           const saveTitle = document.createElement("h2");
           const saveContent = document.createElement("div");
@@ -138,6 +66,11 @@
 
           saveTitle.textContent = item.title;
           saveContent.innerHTML = item.content;
+          saveContent.style.backgroundColor = "#bdbdbd";
+          saveContent.style.width = "500px";
+          saveContent.style.textAlign = "center";
+          saveContent.style.borderRadius = "10px";
+
           saveId.textContent = item.len + 1;
           deleteMemoBtn.textContent = "삭제";
           deleteMemoBtn.setAttribute("id", item.len);
@@ -152,8 +85,6 @@
       }
 
       function remove() {
-        // console.log(event.srcElement.id);
-        // console.log(allMemo);
         const idx = allMemo.find((item) => item.len == event.srcElement.id);
         if (idx) {
           allMemo.splice(
