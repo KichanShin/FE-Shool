@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>위니브 샵</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const Card = function (props) {
+        return (
+          <div>
+            <h3>{props.goods.productName}</h3>
+            <strong>{props.goods.price}</strong>
+          </div>
+        );
+      };
+
+      const Product = function (props) {
+        return (
+          <div>
+            <Card goods={props.item[0]} />
+            <Card goods={props.item[1]} />
+            <Card goods={props.item[2]} />
+            <Card goods={props.item[3]} />
+            <Card goods={props.item[4]} />
+            <Card goods={props.item[5]} />
+          </div>
+        );
+      };
+
+      const body = (
+        <div>
+          <h1>위니브 상점</h1>
+          <Product item={data} />
+        </div>
+      );
+
+      const domContainer = document.getElementById("root");
+      const root = ReactDOM.createRoot(domContainer);
+      root.render(body);
+    </script>
+  </body>
+</html>

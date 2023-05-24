@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      #path1 {
+        fill: none;
+        stroke: #ff9797;
+        stroke-width: 10px;
+        stroke-linecap: round;
+        stroke-dasharray: 1588 1588;
+        /* stroke-dashoffset: 1300; */
+        animation: line 3s infinite;
+      }
+      @keyframes line {
+        from {
+          stroke-dashoffset: 1588;
+        }
+
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      #path2 {
+        fill: none;
+        stroke: blue;
+        stroke-width: 3px;
+        stroke-linecap: round;
+        stroke-dasharray: 1588 1588;
+        /* stroke-dashoffset: 1300; */
+        animation: line 10s infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <svg viewBox="0 0 1000 182" xmlns="http://www.w3.org/2000/svg">
+      <path
+        id="path1"
+        d="M7 137.125C7 137.125 150.6 175.425 292.3 175.425C434 175.425 537.1 161.025 573.5 85.225C626.6 -25.375 460.9 52.325 500.5 89.025C514 101.525 527.5 0.625014 471.7 6.22501C426 10.825 426.2 56.125 434.1 79.525C451.8 132.525 497.9 168.025 590 175.425C682.1 182.825 829.2 120.425 993.1 120.425"
+      />
+    </svg>
+    <svg width="369" height="233" viewBox="0 0 369 233">
+      <path
+        id="path2"
+        d="M1 130C1 130 50 231 61 181C72 131 123 130 123 130M123 130H295M123 130L285 7L203 231L135 2L295 130M295 130C324.763 40.9496 340.929 27.9696 368 130"
+      />
+    </svg>
+
+    <script>
+      const path1 = document.querySelector("#path1");
+      console.log(path1.getTotalLength());
+    </script>
+  </body>
+</html>
