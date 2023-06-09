@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <script>
+      // 이 문제는 실제로 입사문제로 사용되던 알고리즘 문제입니다.
+      // 배열이 하나 주어졌을때 [3,3,2,4,5,2,1,0,3];
+      // 함수를 만듭니다. 가장 먼저 반복되는 원소의 b값을 반환합니다.
+      let arr = [3, 3, 2, 4, 5, 2, 1, 0, 3];
+
+      function test(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] === arr[j]) {
+              return arr[i];
+            }
+          }
+        }
+        return undefined;
+      }
+
+      function test2(arr){
+        const useHash = {};
+        //useHash[3]
+        for(let i =0; i< arr.length; i++){
+            if(useHash[arr[i]]){
+                return arr[i]
+            }else {
+                // 해쉬테이블의 키로 arr의 원소를 차례로 등록 
+                // {3:0, 2:1, }
+                useHash[arr[i]] = i;
+            }
+        }
+      }
+    </script>
+  </body>
+</html>
